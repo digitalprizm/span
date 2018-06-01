@@ -21,20 +21,22 @@ def get_details(doc,method,cost_center_name='',company=''):
 		
 		cost_center.cost_center_name= customer_name+str(name)
 		cost_center.parent_cost_center='dpin - dn'
-	# company=test.company
 		cost_center.company=cost_center.company
-	# cost_center=cost_center.parent_cost_center
-	# frappe.msgprint(cost_center)
+		cost_center.name=name
+		# cost_center.cost_center_name=cost_center.cost_center_name
 	
 		cost_center.insert(ignore_permissions=True)
 		cost_center.save(ignore_permissions=True)
-	# frappe.db.commit()
+
 		project = frappe.new_doc("Project")
 		project.project_name=customer_name+str(name)
 		project.customer = customer_name
 		project.sales_order = name
-		project.cost_center = cost_center.parent_cost_center
+		
 		project.status="Open"
+		frappe.msgprint(project.project_name)
+
+		project.cost_center = cost_center.name
 		project.insert(ignore_permissions=True)
 		project.save(ignore_permissions=True)
 		frappe.db.commit()
