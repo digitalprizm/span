@@ -11,7 +11,7 @@ app_color = "grey"
 app_email = "dpi@dpi.com"
 app_license = "MIT"
 
-fixtures = ['Custom Field', 'Property Setter',"Print Format",'Report']
+fixtures = ['Custom Field', 'Property Setter',"Print Format"]
 # Includes in <head>
 # ------------------
 

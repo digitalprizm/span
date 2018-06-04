@@ -20,7 +20,10 @@ def get_details(doc,method,cost_center_name='',company=''):
 	if order_types =="Project":
 		
 		cost_center.cost_center_name= customer_name+str(name)
-		cost_center.parent_cost_center='dpin - dn'
+		default_cost_center = frappe.db.get_value('Company', doc.company, 'cost_center')
+		parent_cost_center = frappe.db.get_value('Cost Center', default_cost_center, 'parent_cost_center')
+
+		cost_center.parent_cost_center= parent_cost_center
 		cost_center.company=cost_center.company
 		cost_center.name=name
 		# cost_center.cost_center_name=cost_center.cost_center_name
@@ -34,7 +37,7 @@ def get_details(doc,method,cost_center_name='',company=''):
 		project.sales_order = name
 		
 		project.status="Open"
-		frappe.msgprint(project.project_name)
+		frappe.msgprint("Project " + project.project_name +" is created")
 
 		project.cost_center = cost_center.name
 		project.insert(ignore_permissions=True)
